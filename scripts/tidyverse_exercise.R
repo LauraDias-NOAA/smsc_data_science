@@ -67,11 +67,12 @@ origins
 
 # Iris petal shape --------------------------------------------------------
 
-irisTbl
+irisTbl <-
+  as_tibble(iris)
 
 # You have developed a derived variable, "petalShape" to describe Iris flowers. 
-# This variable is defined as the ratio of petalLength to petalWidth 
-# (petalLength/petalWidth). Calculate the average (mean) shape of petals in the
+# This variable is defined as the ratio of petal.Length to petal.Width 
+# (petal.Length/petal.Width). Calculate the average (mean) shape of petals in the
 # iris dataset. Return your results as a two-column data frame with the columns 
 # species and petalShape_mean.
 
