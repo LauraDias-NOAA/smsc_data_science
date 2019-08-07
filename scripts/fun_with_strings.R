@@ -48,7 +48,6 @@ school_districts <-
 
 # tabulate title 1 schools ------------------------------------------------
 
- 
 title1 <- 
   map_dfr(
   school_districts,
