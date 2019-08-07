@@ -1,0 +1,51 @@
+region,division,state,area,population
+South,East South Central,Alabama,51609,3615
+West,Pacific,Alaska,589757,365
+West,Mountain,Arizona,113909,2212
+South,West South Central,Arkansas,53104,2110
+West,Pacific,California,158693,21198
+West,Mountain,Colorado,104247,2541
+Northeast,New England,Connecticut,5009,3100
+South,South Atlantic,Delaware,2057,579
+South,South Atlantic,Florida,58560,8277
+South,South Atlantic,Georgia,58876,4931
+West,Pacific,Hawaii,6450,868
+West,Mountain,Idaho,83557,813
+North Central,East North Central,Illinois,56400,11197
+North Central,East North Central,Indiana,36291,5313
+North Central,West North Central,Iowa,56290,2861
+North Central,West North Central,Kansas,82264,2280
+South,East South Central,Kentucky,40395,3387
+South,West South Central,Louisiana,48523,3806
+Northeast,New England,Maine,33215,1058
+South,South Atlantic,Maryland,10577,4122
+Northeast,New England,Massachusetts,8257,5814
+North Central,East North Central,Michigan,58216,9111
+North Central,West North Central,Minnesota,84068,3921
+South,East South Central,Mississippi,47716,2341
+North Central,West North Central,Missouri,69686,4767
+West,Mountain,Montana,147138,746
+North Central,West North Central,Nebraska,77227,1544
+West,Mountain,Nevada,110540,590
+Northeast,New England,New Hampshire,9304,812
+Northeast,Middle Atlantic,New Jersey,7836,7333
+West,Mountain,New Mexico,121666,1144
+Northeast,Middle Atlantic,New York,49576,18076
+South,South Atlantic,North Carolina,52586,5441
+North Central,West North Central,North Dakota,70665,637
+North Central,East North Central,Ohio,41222,10735
+South,West South Central,Oklahoma,69919,2715
+West,Pacific,Oregon,96981,2284
+Northeast,Middle Atlantic,Pennsylvania,45333,11860
+Northeast,New England,Rhode Island,1214,931
+South,South Atlantic,South Carolina,31055,2816
+North Central,West North Central,South Dakota,77047,681
+South,East South Central,Tennessee,42244,4173
+South,West South Central,Texas,267339,12237
+West,Mountain,Utah,84916,1203
+Northeast,New England,Vermont,9609,472
+South,South Atlantic,Virginia,40815,4981
+West,Pacific,Washington,68192,3559
+South,South Atlantic,West Virginia,24181,1799
+North Central,East North Central,Wisconsin,56154,4589
+West,Mountain,Wyoming,97914,376
