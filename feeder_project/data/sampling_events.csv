@@ -1,0 +1,28 @@
+treatement_id,treatment,date,monitoring_start,treatment_start,treatment_end,monitoring_end,observer,notes
+feeder1,feeder,2019-07-08,07:03:44,07:33:44,07:45:23,08:15:23,axb,Wet rainy day and feeder was nearly empty; Accident on road caused delayed feeder filling
+human1,human,2019-07-08,10:08:12,10:38:12,10:44:03,11:14:03,axb,Light rain at this time
+control1,control,2019-07-08,14:10:00,14:30:00,14:30:00,15:15:00,axb,
+human2,human,2019-07-09,06:43:48,07:13:48,07:18:33,07:48:33,axb,
+control2,control,2019-07-09,10:05:00,10:25:00,10:25:00,10:56:43,axb,
+feeder2,feeder,2019-07-09,14:20:10,14:40:10,14:47:13,15:07:13,axb,Cat bird stayed at feeder during feeder filling
+control3,control,2019-07-11,6:40:00,7:00:00,7:00:00,7:20:40,axb,
+feeder3,feeder,2019-07-11,10:20:11,10:40:11,10:48:36,11:08:36,axb,
+human3,human,2019-07-11,14:28:48,14:48:48,14:54:16,15:14:16,axb,
+control4,control,2019-07-12,6:40:00,7:00:00,7:00:00,7:20:00,axb,Feeder was low on food
+human4,human,2019-07-12,10:24:27,10:39:27,10:47:20,11:02:20,axb,Little to none food in feeder
+feeder4,feeder,2019-07-12,14:30:10,14:45:10,14:55:09,15:10:09,axb,
+control5,control,2019-07-13,10:15:00,10:35:00,10:35:00,10:55:00,skh,
+feeder5,feeder,2019-07-16,7:09:29,7:24:29,7:32:20,7:47:20,axb,
+control6,control,2019-07-16,10:20:00,10:35:00,10:35:00,10:50:00,axb,
+human5,human,2019-07-16,14:15:20,14:30:20,14:35:46,14:50:46,axb,
+human6,human,2019-07-17,7:02:23,7:17:23,7:23:35,7:38:35,axb,Not many birds returned to feeder
+feeder6,feeder,2019-07-17,10:34:44,10:49:44,10:55:27,11:10:27,axb,Late start due to using the bathroom
+control7,control,2019-07-17,14:25:00,14:40:00,14:40:00,14:55:00,axb,
+feeder7,feeder,2019-07-19,10:27:25,10:42:55,10:54:32,11:09:32,axb,Took a long time to huddle the last bits of food for feeder
+human7,human,2019-07-19,14:25:06,14:40:06,14:46:05,15:01:05,axb,
+human8,human,2019-07-20,6:56:50,7:11:50,7:17:07,7:32:07,axb,
+feeder8,feeder,2019-07-20,14:23:11,14:38:11,14:46:33,15:01:33,axb,Ran out of sunflower seeds; food substituted
+control8,control,2019-07-21,6:45:00,7:00:00,7:00:00,7:15:00,axb,
+feeder9,feeder,2019-07-22,7:26:02,7:39:02,7:48:52,8:03:52,axb,Late start; not much activity
+human9,human,2019-07-22,10:24:39,10:39:39,10:45:15,11:00:15,axb,
+control9,control,2019-07-22,14:25:00,14:40:00,14:40:00,14:55:00,axb,

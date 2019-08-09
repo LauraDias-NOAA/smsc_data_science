@@ -1,0 +1,16 @@
+alpha_code,species_name,species_class
+BLJA,Blue jay,tolerant
+CACH,Carolina chickadee,avoider
+CARW,Carolina wren,tolerant
+COGR,Common grackle,tolerant
+DOWO,Downy Woodpecker,avoider
+EUST,European starling,obligate
+GRCA,Gray catbird,tolerant
+HOFI,House finch,obligate
+HOSP,House sparrow,obligate
+MODO,Mourning dove,tolerant
+NOCA,Northern cardinal,tolerant
+NOMO,Northern mockingbird,obligate
+RBWO,Red-bellied woodpecker,avoider
+TUTI,Tufted titmouse,avoider
+WBNU,White-breasted nuthatch,avoider
