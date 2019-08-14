@@ -11,37 +11,75 @@
 # and thus need to be grouped.
 
 
+# setup -------------------------------------------------------------------
+
+library(tidyverse)
+
 # Simulate data -----------------------------------------------------------
 
-# Write a function to generature a noisy wave:
+# Write a function to generate a sine wave:
 
-make_noisyWave <-
-  function(noiseValue) {
-    purrr::map_dfr(
-      # Generate a sequence of points by 0.1:
-      seq(0, 12, .1),
-      function(x){
-        # Create some gaussian noise:
-        noise <-
-          rnorm(n = 1, sd = noiseValue * .007)
-        # Output tibble of time and oxygen concentration:
-        tibble(
-          time = x * 10,
-          # Sin wave, shifted up, with noise:
-          dissOx = mean(c(7.5, 10)) + sin(x) + noise)
-      }
+make_sineWave <-
+  function(timeVector, y_offset, amplitude, angular_freq, phase){
+    tibble(
+      time = timeVector,
+      dissOx = y_offset + amplitude * sin(angular_freq*time + phase)
     )
   }
 
 # Note: The real data are not a sine curve but rather a sort of reverse 
 # sawtooth wave.
 
+# Generate a sine wave:
+
+sineWave <-
+  make_sineWave(
+    timeVector = 1:120,
+    y_offset = 8.75,
+    amplitude = 1.25,
+    angular_freq = 0.15,
+    phase = .5)
+
+# Plot the data:
+
+sineWave %>%
+  ggplot(
+    aes(x = time, y = dissOx)
+  ) +
+  geom_line() +
+  labs(
+    title = 'Dissolved oxygen concentration over time',
+    x = 'Time (seconds)',
+    y = 'Dissolved oxygen (mg/L)'
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_text(size = rel(1.2)),
+    axis.text = element_text(size = rel(1.2)),
+    title = element_text(size = rel(1.5))
+  )
+
+# Try changing the y-offset, amplitude, angular frequency, and phase. How does this influence the sine wave?
+
+# Write a function to generature a noisy wave:
+
+make_noisyWave <-
+  function(sineWave_frame, noiseValue) {
+    sineWave_frame %>%
+      mutate(
+        dissOx = rnorm(nrow(.), mean = dissOx, sd = noiseValue * .007))
+  }
+
 noisyWave <-
-  make_noisyWave(noiseValue = 20)
+  make_noisyWave(sineWave, noiseValue = 20)
+
+noisyWave
+
 
 # Plot simulated data to determine most appropriate noise values:
 
-ggplot(noisyWave, aes(x = time, y = dissOx)) +
+noisyWave %>%
+  ggplot(aes(x = time, y = dissOx)) +
   geom_point() + 
   geom_line() +
   labs(
@@ -66,22 +104,22 @@ ggplot(noisyWave, aes(x = time, y = dissOx)) +
 
 add_smooth <-
   function(noisyData, smoothingSpan){
-    noisyData %>%
-      mutate(
-        # See ?stats::loess for details:
-        dissOx_smooth = loess(
-          dissOx ~ time,
-          data = .,
-          # Span will control how smoothed the data will be:
-          span = smoothingSpan) %>%
-          # Predict will return predicted values for a given time:
-          predict())
+    loess(
+      dissOx ~ time,
+      data = noisyData,
+      # Span will control how smoothed the data will be:
+      span = smoothingSpan) %>%
+      # Predict will return predicted values for a given time:
+      predict()
   }
+
+noisyWave %>%
+  mutate(dissOx_smooth = add_smooth(., smoothingSpan = 0.3))
 
 # View smoothing to determine which smoothing span is best:
 
 noisyWave %>%
-  add_smooth(.3) %>%
+  mutate(dissOx_smooth = add_smooth(., smoothingSpan = 0.3)) %>%
   ggplot(aes(x = time, y = dissOx)) +
   geom_point() + 
   geom_line() +
@@ -104,8 +142,8 @@ noisyWave %>%
 # The best smoothing parameter is probably dependent on both the noise in
 # the data and the smoothing span:
 
-make_noisyWave(noiseValue = 10) %>%
-  add_smooth(.3) %>%
+make_noisyWave(sineWave, noiseValue = 20) %>%
+  mutate(dissOx_smooth = add_smooth(., smoothingSpan = 0.3)) %>%
   ggplot(aes(x = time, y = dissOx)) +
   geom_point() + 
   geom_line() +
@@ -129,9 +167,9 @@ make_noisyWave(noiseValue = 10) %>%
 
 # Generate data:
 
-wave_noisySmooth <-
-  make_noisyWave(noiseValue = 10) %>%
-  add_smooth(.3) %>%
+wave_trials <-
+  noisyWave %>%
+  mutate(dissOx_smooth = add_smooth(., smoothingSpan = 0.3)) %>%
   mutate(
     # Look forward to determine dissOx is increasing or decreasing:
     slope = ifelse(
@@ -151,13 +189,15 @@ wave_noisySmooth <-
         cumsum(trial_group),
         NA))
 
+wave_trials
+
 # Plot the data:
 
-wave_noisySmooth %>%
+wave_trials %>%
   ggplot(aes(x = time, y = dissOx)) +
   geom_ribbon(
     # Why do we need to add a new data argument?
-    data = wave_noisySmooth %>%
+    data = wave_trials %>%
       filter(!is.na(trial_group)) %>%
       group_by(trial_group) %>%
       mutate(minTime = min(time), maxTime = max(time)),
@@ -170,14 +210,21 @@ wave_noisySmooth %>%
   ) +
   geom_point(size = 2) + 
   geom_line() +
-  geom_line(aes(y = dissOx_smooth), color = 'blue', size = 1) +
+  geom_line(
+    aes(y = dissOx_smooth),
+    color = 'blue',
+    size = 1) +
   labs(
     title = 'Dissolved oxygen concentration over time',
     x = 'Time (seconds)',
     y = 'Dissolved oxygen (mg/L)'
   ) +
-  scale_fill_manual(values = c('#B02909', '#DF993A'), name = 'Trial') +
-  scale_y_continuous(limits = c(7.5, 10), expand = c(0,0)) +
+  scale_fill_manual(
+    values = c('#B02909', '#DF993A', '#F24A47'),
+    name = 'Trial') +
+  scale_y_continuous(
+    limits = c(7.5, 10),
+    expand = c(0,0)) +
   theme_bw() +
   theme(
     axis.title = element_text(size = rel(1.2)),
@@ -187,12 +234,17 @@ wave_noisySmooth %>%
 
 # Subset the data ---------------------------------------------------------
 
+# Subset data to observations (rows) associated with trial groups and the
+# columns of interest:
+
 gilled_iguana <-
-  wave_noisySmooth %>%
+  wave_trials %>%
   filter(!is.na(trial_group)) %>%
   select(trial_group, time, dissOx)
 
-# Lorena is intersted in the slope of decrease after adding the DO. Here's
+gilled_iguana
+
+# Lorena is interested in the slope of decrease after adding the DO. Here's
 # what that might look like:
 
 map(
