@@ -5,8 +5,6 @@
 library(tidyverse)
 library(lubridate)
 
-# setup -------------------------------------------------------------------
-
 gitUrl <-
   'https://raw.githubusercontent.com/bsevansunc/'
 
@@ -65,7 +63,7 @@ origins
 # frame with the columns: species, nCharacters, and meanMass.
 
 
-# Iris petal shape --------------------------------------------------------
+# 5. Iris petal shape -----------------------------------------------------
 
 irisTbl <-
   as_tibble(iris)
