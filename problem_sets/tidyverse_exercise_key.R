@@ -79,6 +79,7 @@ birdHabits
 birdCounts %>%
   filter(site == 'apple') %>%
   left_join(birdHabits, by = 'species') %>%
+  filter(year(date) == 2009) %>%
   group_by(diet) %>%
   summarize(n = n())
 
